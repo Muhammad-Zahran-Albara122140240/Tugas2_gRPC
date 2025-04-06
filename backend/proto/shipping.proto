@@ -1,28 +1,27 @@
 syntax = "proto3";
 
-package shipping;
+package shippingpb;
 
-option go_package = "github.com/Muhammad-Zahran-Albara122140240/Tugas2_gRPC/backend/pb/shippingpb";
+option go_package = "backend/pb/shippingpb";
 
 service ShippingService {
-  rpc ShipOrder(ShipOrderRequest) returns (ShipOrderResponse);
-  rpc CancelShipping(CancelShippingRequest) returns (CancelShippingResponse);
+  rpc Ship(ShipRequest) returns (ShipResponse);
+  rpc CancelShipping(CancelShipRequest) returns (CancelShipResponse);
 }
 
-message ShipOrderRequest {
-  string order_id = 1;
-  string address = 2;
+message ShipRequest {
+  string address = 1;
 }
 
-message ShipOrderResponse {
-  string shipment_id = 1;
+message ShipResponse {
+  string shipping_id = 1;
   string status = 2;
 }
 
-message CancelShippingRequest {
-  string shipment_id = 1;
+message CancelShipRequest {
+  string shipping_id = 1;
 }
 
-message CancelShippingResponse {
+message CancelShipResponse {
   string status = 1;
 }

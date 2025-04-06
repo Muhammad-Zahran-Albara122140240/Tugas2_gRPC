@@ -1,13 +1,12 @@
 package main
 
 import (
-	
     "context"
     "fmt"
     "log"
     "net"
 
-    "github.com/Muhammad-Zahran-Albara122140240/Tugas2_gRPC/backend/pb/shippingpb"
+    "Tugas2_PWL/backend/pb/shippingpb"
     "google.golang.org/grpc"
 )
 
@@ -15,7 +14,7 @@ type shippingServer struct {
     shippingpb.UnimplementedShippingServiceServer
 }
 
-func (s *shippingServer) ShipOrder(ctx context.Context, req *shippingpb.ShipRequest) (*shippingpb.ShipResponse, error) {
+func (s *shippingServer) Ship(ctx context.Context, req *shippingpb.ShipRequest) (*shippingpb.ShipResponse, error) {
     log.Println("Shipping order to:", req.Address)
     return &shippingpb.ShipResponse{
         ShippingId: "SHIP123",
@@ -24,7 +23,7 @@ func (s *shippingServer) ShipOrder(ctx context.Context, req *shippingpb.ShipRequ
 }
 
 func (s *shippingServer) CancelShipping(ctx context.Context, req *shippingpb.CancelShipRequest) (*shippingpb.CancelShipResponse, error) {
-    log.Println("Canceling shipping for Order:", req.OrderId)
+    log.Println("Canceling shipping for Shipping ID:", req.ShippingId)
     return &shippingpb.CancelShipResponse{
         Status: "Shipping Cancelled",
     }, nil

@@ -19,16 +19,16 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PaymentService_MakePayment_FullMethodName   = "/payment.PaymentService/MakePayment"
-	PaymentService_RefundPayment_FullMethodName = "/payment.PaymentService/RefundPayment"
+	PaymentService_ProcessPayment_FullMethodName = "/paymentpb.PaymentService/ProcessPayment"
+	PaymentService_RefundPayment_FullMethodName  = "/paymentpb.PaymentService/RefundPayment"
 )
 
 // PaymentServiceClient is the client API for PaymentService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PaymentServiceClient interface {
-	MakePayment(ctx context.Context, in *MakePaymentRequest, opts ...grpc.CallOption) (*MakePaymentResponse, error)
-	RefundPayment(ctx context.Context, in *RefundPaymentRequest, opts ...grpc.CallOption) (*RefundPaymentResponse, error)
+	ProcessPayment(ctx context.Context, in *PaymentRequest, opts ...grpc.CallOption) (*PaymentResponse, error)
+	RefundPayment(ctx context.Context, in *RefundRequest, opts ...grpc.CallOption) (*RefundResponse, error)
 }
 
 type paymentServiceClient struct {
@@ -39,19 +39,19 @@ func NewPaymentServiceClient(cc grpc.ClientConnInterface) PaymentServiceClient {
 	return &paymentServiceClient{cc}
 }
 
-func (c *paymentServiceClient) MakePayment(ctx context.Context, in *MakePaymentRequest, opts ...grpc.CallOption) (*MakePaymentResponse, error) {
+func (c *paymentServiceClient) ProcessPayment(ctx context.Context, in *PaymentRequest, opts ...grpc.CallOption) (*PaymentResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(MakePaymentResponse)
-	err := c.cc.Invoke(ctx, PaymentService_MakePayment_FullMethodName, in, out, cOpts...)
+	out := new(PaymentResponse)
+	err := c.cc.Invoke(ctx, PaymentService_ProcessPayment_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *paymentServiceClient) RefundPayment(ctx context.Context, in *RefundPaymentRequest, opts ...grpc.CallOption) (*RefundPaymentResponse, error) {
+func (c *paymentServiceClient) RefundPayment(ctx context.Context, in *RefundRequest, opts ...grpc.CallOption) (*RefundResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RefundPaymentResponse)
+	out := new(RefundResponse)
 	err := c.cc.Invoke(ctx, PaymentService_RefundPayment_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -63,8 +63,8 @@ func (c *paymentServiceClient) RefundPayment(ctx context.Context, in *RefundPaym
 // All implementations must embed UnimplementedPaymentServiceServer
 // for forward compatibility.
 type PaymentServiceServer interface {
-	MakePayment(context.Context, *MakePaymentRequest) (*MakePaymentResponse, error)
-	RefundPayment(context.Context, *RefundPaymentRequest) (*RefundPaymentResponse, error)
+	ProcessPayment(context.Context, *PaymentRequest) (*PaymentResponse, error)
+	RefundPayment(context.Context, *RefundRequest) (*RefundResponse, error)
 	mustEmbedUnimplementedPaymentServiceServer()
 }
 
@@ -75,10 +75,10 @@ type PaymentServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedPaymentServiceServer struct{}
 
-func (UnimplementedPaymentServiceServer) MakePayment(context.Context, *MakePaymentRequest) (*MakePaymentResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method MakePayment not implemented")
+func (UnimplementedPaymentServiceServer) ProcessPayment(context.Context, *PaymentRequest) (*PaymentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProcessPayment not implemented")
 }
-func (UnimplementedPaymentServiceServer) RefundPayment(context.Context, *RefundPaymentRequest) (*RefundPaymentResponse, error) {
+func (UnimplementedPaymentServiceServer) RefundPayment(context.Context, *RefundRequest) (*RefundResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RefundPayment not implemented")
 }
 func (UnimplementedPaymentServiceServer) mustEmbedUnimplementedPaymentServiceServer() {}
@@ -102,26 +102,26 @@ func RegisterPaymentServiceServer(s grpc.ServiceRegistrar, srv PaymentServiceSer
 	s.RegisterService(&PaymentService_ServiceDesc, srv)
 }
 
-func _PaymentService_MakePayment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MakePaymentRequest)
+func _PaymentService_ProcessPayment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PaymentRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PaymentServiceServer).MakePayment(ctx, in)
+		return srv.(PaymentServiceServer).ProcessPayment(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PaymentService_MakePayment_FullMethodName,
+		FullMethod: PaymentService_ProcessPayment_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentServiceServer).MakePayment(ctx, req.(*MakePaymentRequest))
+		return srv.(PaymentServiceServer).ProcessPayment(ctx, req.(*PaymentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _PaymentService_RefundPayment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RefundPaymentRequest)
+	in := new(RefundRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -133,7 +133,7 @@ func _PaymentService_RefundPayment_Handler(srv interface{}, ctx context.Context,
 		FullMethod: PaymentService_RefundPayment_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentServiceServer).RefundPayment(ctx, req.(*RefundPaymentRequest))
+		return srv.(PaymentServiceServer).RefundPayment(ctx, req.(*RefundRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -142,12 +142,12 @@ func _PaymentService_RefundPayment_Handler(srv interface{}, ctx context.Context,
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var PaymentService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "payment.PaymentService",
+	ServiceName: "paymentpb.PaymentService",
 	HandlerType: (*PaymentServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "MakePayment",
-			Handler:    _PaymentService_MakePayment_Handler,
+			MethodName: "ProcessPayment",
+			Handler:    _PaymentService_ProcessPayment_Handler,
 		},
 		{
 			MethodName: "RefundPayment",

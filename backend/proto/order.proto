@@ -1,20 +1,19 @@
 syntax = "proto3";
 
-package order;
+package orderpb;
 
-option go_package = "github.com/Muhammad-Zahran-Albara122140240/Tugas2_gRPC/backend/pb/orderpb";
+option go_package = "backend/pb/orderpb";
 
 service OrderService {
-  rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
+  rpc CreateOrder(OrderRequest) returns (OrderResponse);
   rpc CancelOrder(CancelOrderRequest) returns (CancelOrderResponse);
 }
 
-message CreateOrderRequest {
-  string product_id = 1;
-  int32 quantity = 2;
+message OrderRequest {
+  string item = 1;
 }
 
-message CreateOrderResponse {
+message OrderResponse {
   string order_id = 1;
   string status = 2;
 }

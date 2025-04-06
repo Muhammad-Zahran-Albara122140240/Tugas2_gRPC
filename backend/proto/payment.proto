@@ -1,28 +1,28 @@
 syntax = "proto3";
 
-package payment;
+package paymentpb;
 
-option go_package = "github.com/Muhammad-Zahran-Albara122140240/Tugas2_gRPC/backend/pb/paymentpb";
+option go_package = "backend/pb/paymentpb";
 
 service PaymentService {
-  rpc MakePayment(MakePaymentRequest) returns (MakePaymentResponse);
-  rpc RefundPayment(RefundPaymentRequest) returns (RefundPaymentResponse);
+  rpc ProcessPayment(PaymentRequest) returns (PaymentResponse);
+  rpc RefundPayment(RefundRequest) returns (RefundResponse);
 }
 
-message MakePaymentRequest {
+message PaymentRequest {
   string order_id = 1;
   double amount = 2;
 }
 
-message MakePaymentResponse {
+message PaymentResponse {
   string payment_id = 1;
   string status = 2;
 }
 
-message RefundPaymentRequest {
+message RefundRequest {
   string payment_id = 1;
 }
 
-message RefundPaymentResponse {
+message RefundResponse {
   string status = 1;
 }

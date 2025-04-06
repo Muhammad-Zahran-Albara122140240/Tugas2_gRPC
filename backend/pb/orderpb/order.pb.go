@@ -21,28 +21,27 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type CreateOrderRequest struct {
+type OrderRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ProductId     string                 `protobuf:"bytes,1,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
-	Quantity      int32                  `protobuf:"varint,2,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	Item          string                 `protobuf:"bytes,1,opt,name=item,proto3" json:"item,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CreateOrderRequest) Reset() {
-	*x = CreateOrderRequest{}
+func (x *OrderRequest) Reset() {
+	*x = OrderRequest{}
 	mi := &file_order_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CreateOrderRequest) String() string {
+func (x *OrderRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateOrderRequest) ProtoMessage() {}
+func (*OrderRequest) ProtoMessage() {}
 
-func (x *CreateOrderRequest) ProtoReflect() protoreflect.Message {
+func (x *OrderRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_order_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -54,26 +53,19 @@ func (x *CreateOrderRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateOrderRequest.ProtoReflect.Descriptor instead.
-func (*CreateOrderRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use OrderRequest.ProtoReflect.Descriptor instead.
+func (*OrderRequest) Descriptor() ([]byte, []int) {
 	return file_order_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *CreateOrderRequest) GetProductId() string {
+func (x *OrderRequest) GetItem() string {
 	if x != nil {
-		return x.ProductId
+		return x.Item
 	}
 	return ""
 }
 
-func (x *CreateOrderRequest) GetQuantity() int32 {
-	if x != nil {
-		return x.Quantity
-	}
-	return 0
-}
-
-type CreateOrderResponse struct {
+type OrderResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	OrderId       string                 `protobuf:"bytes,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
 	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
@@ -81,20 +73,20 @@ type CreateOrderResponse struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CreateOrderResponse) Reset() {
-	*x = CreateOrderResponse{}
+func (x *OrderResponse) Reset() {
+	*x = OrderResponse{}
 	mi := &file_order_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CreateOrderResponse) String() string {
+func (x *OrderResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateOrderResponse) ProtoMessage() {}
+func (*OrderResponse) ProtoMessage() {}
 
-func (x *CreateOrderResponse) ProtoReflect() protoreflect.Message {
+func (x *OrderResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_order_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -106,19 +98,19 @@ func (x *CreateOrderResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateOrderResponse.ProtoReflect.Descriptor instead.
-func (*CreateOrderResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use OrderResponse.ProtoReflect.Descriptor instead.
+func (*OrderResponse) Descriptor() ([]byte, []int) {
 	return file_order_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *CreateOrderResponse) GetOrderId() string {
+func (x *OrderResponse) GetOrderId() string {
 	if x != nil {
 		return x.OrderId
 	}
 	return ""
 }
 
-func (x *CreateOrderResponse) GetStatus() string {
+func (x *OrderResponse) GetStatus() string {
 	if x != nil {
 		return x.Status
 	}
@@ -217,21 +209,19 @@ var File_order_proto protoreflect.FileDescriptor
 
 const file_order_proto_rawDesc = "" +
 	"\n" +
-	"\vorder.proto\x12\x05order\"O\n" +
-	"\x12CreateOrderRequest\x12\x1d\n" +
-	"\n" +
-	"product_id\x18\x01 \x01(\tR\tproductId\x12\x1a\n" +
-	"\bquantity\x18\x02 \x01(\x05R\bquantity\"H\n" +
-	"\x13CreateOrderResponse\x12\x19\n" +
+	"\vorder.proto\x12\aorderpb\"\"\n" +
+	"\fOrderRequest\x12\x12\n" +
+	"\x04item\x18\x01 \x01(\tR\x04item\"B\n" +
+	"\rOrderResponse\x12\x19\n" +
 	"\border_id\x18\x01 \x01(\tR\aorderId\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\"/\n" +
 	"\x12CancelOrderRequest\x12\x19\n" +
 	"\border_id\x18\x01 \x01(\tR\aorderId\"-\n" +
 	"\x13CancelOrderResponse\x12\x16\n" +
-	"\x06status\x18\x01 \x01(\tR\x06status2\x9a\x01\n" +
-	"\fOrderService\x12D\n" +
-	"\vCreateOrder\x12\x19.order.CreateOrderRequest\x1a\x1a.order.CreateOrderResponse\x12D\n" +
-	"\vCancelOrder\x12\x19.order.CancelOrderRequest\x1a\x1a.order.CancelOrderResponseBKZIgithub.com/Muhammad-Zahran-Albara122140240/Tugas2_gRPC/backend/pb/orderpbb\x06proto3"
+	"\x06status\x18\x01 \x01(\tR\x06status2\x96\x01\n" +
+	"\fOrderService\x12<\n" +
+	"\vCreateOrder\x12\x15.orderpb.OrderRequest\x1a\x16.orderpb.OrderResponse\x12H\n" +
+	"\vCancelOrder\x12\x1b.orderpb.CancelOrderRequest\x1a\x1c.orderpb.CancelOrderResponseB\x14Z\x12backend/pb/orderpbb\x06proto3"
 
 var (
 	file_order_proto_rawDescOnce sync.Once
@@ -247,16 +237,16 @@ func file_order_proto_rawDescGZIP() []byte {
 
 var file_order_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_order_proto_goTypes = []any{
-	(*CreateOrderRequest)(nil),  // 0: order.CreateOrderRequest
-	(*CreateOrderResponse)(nil), // 1: order.CreateOrderResponse
-	(*CancelOrderRequest)(nil),  // 2: order.CancelOrderRequest
-	(*CancelOrderResponse)(nil), // 3: order.CancelOrderResponse
+	(*OrderRequest)(nil),        // 0: orderpb.OrderRequest
+	(*OrderResponse)(nil),       // 1: orderpb.OrderResponse
+	(*CancelOrderRequest)(nil),  // 2: orderpb.CancelOrderRequest
+	(*CancelOrderResponse)(nil), // 3: orderpb.CancelOrderResponse
 }
 var file_order_proto_depIdxs = []int32{
-	0, // 0: order.OrderService.CreateOrder:input_type -> order.CreateOrderRequest
-	2, // 1: order.OrderService.CancelOrder:input_type -> order.CancelOrderRequest
-	1, // 2: order.OrderService.CreateOrder:output_type -> order.CreateOrderResponse
-	3, // 3: order.OrderService.CancelOrder:output_type -> order.CancelOrderResponse
+	0, // 0: orderpb.OrderService.CreateOrder:input_type -> orderpb.OrderRequest
+	2, // 1: orderpb.OrderService.CancelOrder:input_type -> orderpb.CancelOrderRequest
+	1, // 2: orderpb.OrderService.CreateOrder:output_type -> orderpb.OrderResponse
+	3, // 3: orderpb.OrderService.CancelOrder:output_type -> orderpb.CancelOrderResponse
 	2, // [2:4] is the sub-list for method output_type
 	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name

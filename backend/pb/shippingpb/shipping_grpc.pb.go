@@ -19,16 +19,16 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ShippingService_ShipOrder_FullMethodName      = "/shipping.ShippingService/ShipOrder"
-	ShippingService_CancelShipping_FullMethodName = "/shipping.ShippingService/CancelShipping"
+	ShippingService_Ship_FullMethodName           = "/shippingpb.ShippingService/Ship"
+	ShippingService_CancelShipping_FullMethodName = "/shippingpb.ShippingService/CancelShipping"
 )
 
 // ShippingServiceClient is the client API for ShippingService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ShippingServiceClient interface {
-	ShipOrder(ctx context.Context, in *ShipOrderRequest, opts ...grpc.CallOption) (*ShipOrderResponse, error)
-	CancelShipping(ctx context.Context, in *CancelShippingRequest, opts ...grpc.CallOption) (*CancelShippingResponse, error)
+	Ship(ctx context.Context, in *ShipRequest, opts ...grpc.CallOption) (*ShipResponse, error)
+	CancelShipping(ctx context.Context, in *CancelShipRequest, opts ...grpc.CallOption) (*CancelShipResponse, error)
 }
 
 type shippingServiceClient struct {
@@ -39,19 +39,19 @@ func NewShippingServiceClient(cc grpc.ClientConnInterface) ShippingServiceClient
 	return &shippingServiceClient{cc}
 }
 
-func (c *shippingServiceClient) ShipOrder(ctx context.Context, in *ShipOrderRequest, opts ...grpc.CallOption) (*ShipOrderResponse, error) {
+func (c *shippingServiceClient) Ship(ctx context.Context, in *ShipRequest, opts ...grpc.CallOption) (*ShipResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ShipOrderResponse)
-	err := c.cc.Invoke(ctx, ShippingService_ShipOrder_FullMethodName, in, out, cOpts...)
+	out := new(ShipResponse)
+	err := c.cc.Invoke(ctx, ShippingService_Ship_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *shippingServiceClient) CancelShipping(ctx context.Context, in *CancelShippingRequest, opts ...grpc.CallOption) (*CancelShippingResponse, error) {
+func (c *shippingServiceClient) CancelShipping(ctx context.Context, in *CancelShipRequest, opts ...grpc.CallOption) (*CancelShipResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CancelShippingResponse)
+	out := new(CancelShipResponse)
 	err := c.cc.Invoke(ctx, ShippingService_CancelShipping_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -63,8 +63,8 @@ func (c *shippingServiceClient) CancelShipping(ctx context.Context, in *CancelSh
 // All implementations must embed UnimplementedShippingServiceServer
 // for forward compatibility.
 type ShippingServiceServer interface {
-	ShipOrder(context.Context, *ShipOrderRequest) (*ShipOrderResponse, error)
-	CancelShipping(context.Context, *CancelShippingRequest) (*CancelShippingResponse, error)
+	Ship(context.Context, *ShipRequest) (*ShipResponse, error)
+	CancelShipping(context.Context, *CancelShipRequest) (*CancelShipResponse, error)
 	mustEmbedUnimplementedShippingServiceServer()
 }
 
@@ -75,10 +75,10 @@ type ShippingServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedShippingServiceServer struct{}
 
-func (UnimplementedShippingServiceServer) ShipOrder(context.Context, *ShipOrderRequest) (*ShipOrderResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ShipOrder not implemented")
+func (UnimplementedShippingServiceServer) Ship(context.Context, *ShipRequest) (*ShipResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Ship not implemented")
 }
-func (UnimplementedShippingServiceServer) CancelShipping(context.Context, *CancelShippingRequest) (*CancelShippingResponse, error) {
+func (UnimplementedShippingServiceServer) CancelShipping(context.Context, *CancelShipRequest) (*CancelShipResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CancelShipping not implemented")
 }
 func (UnimplementedShippingServiceServer) mustEmbedUnimplementedShippingServiceServer() {}
@@ -102,26 +102,26 @@ func RegisterShippingServiceServer(s grpc.ServiceRegistrar, srv ShippingServiceS
 	s.RegisterService(&ShippingService_ServiceDesc, srv)
 }
 
-func _ShippingService_ShipOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ShipOrderRequest)
+func _ShippingService_Ship_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ShipRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ShippingServiceServer).ShipOrder(ctx, in)
+		return srv.(ShippingServiceServer).Ship(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ShippingService_ShipOrder_FullMethodName,
+		FullMethod: ShippingService_Ship_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ShippingServiceServer).ShipOrder(ctx, req.(*ShipOrderRequest))
+		return srv.(ShippingServiceServer).Ship(ctx, req.(*ShipRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ShippingService_CancelShipping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CancelShippingRequest)
+	in := new(CancelShipRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -133,7 +133,7 @@ func _ShippingService_CancelShipping_Handler(srv interface{}, ctx context.Contex
 		FullMethod: ShippingService_CancelShipping_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ShippingServiceServer).CancelShipping(ctx, req.(*CancelShippingRequest))
+		return srv.(ShippingServiceServer).CancelShipping(ctx, req.(*CancelShipRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -142,12 +142,12 @@ func _ShippingService_CancelShipping_Handler(srv interface{}, ctx context.Contex
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ShippingService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "shipping.ShippingService",
+	ServiceName: "shippingpb.ShippingService",
 	HandlerType: (*ShippingServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "ShipOrder",
-			Handler:    _ShippingService_ShipOrder_Handler,
+			MethodName: "Ship",
+			Handler:    _ShippingService_Ship_Handler,
 		},
 		{
 			MethodName: "CancelShipping",

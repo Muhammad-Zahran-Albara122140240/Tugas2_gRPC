@@ -1,13 +1,12 @@
 package main
 
 import (
-	
     "context"
     "fmt"
     "log"
     "net"
 
-    "github.com/Muhammad-Zahran-Albara122140240/Tugas2_gRPC/backend/pb/paymentpb"
+    "Tugas2_PWL/backend/pb/paymentpb"
     "google.golang.org/grpc"
 )
 
@@ -15,7 +14,7 @@ type paymentServer struct {
     paymentpb.UnimplementedPaymentServiceServer
 }
 
-func (s *paymentServer) MakePayment(ctx context.Context, req *paymentpb.PaymentRequest) (*paymentpb.PaymentResponse, error) {
+func (s *paymentServer) ProcessPayment(ctx context.Context, req *paymentpb.PaymentRequest) (*paymentpb.PaymentResponse, error) {
     log.Println("Processing payment for Order:", req.OrderId)
     return &paymentpb.PaymentResponse{
         PaymentId: "PAY123",
@@ -24,7 +23,7 @@ func (s *paymentServer) MakePayment(ctx context.Context, req *paymentpb.PaymentR
 }
 
 func (s *paymentServer) RefundPayment(ctx context.Context, req *paymentpb.RefundRequest) (*paymentpb.RefundResponse, error) {
-    log.Println("Refunding payment for Order:", req.OrderId)
+    log.Println("Refunding payment ID:", req.PaymentId) // ✅ diganti dari req.OrderId ke req.PaymentId
     return &paymentpb.RefundResponse{
         Status: "Refund Success",
     }, nil

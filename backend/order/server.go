@@ -8,7 +8,7 @@ import (
     "log"
     "net"
 
-    "github.com/Muhammad-Zahran-Albara122140240/Tugas2_gRPC/backend/pb/orderpb"
+    "Tugas2_PWL/backend/pb/orderpb"
     "google.golang.org/grpc"
 )
 

@@ -21,7 +21,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type MakePaymentRequest struct {
+type PaymentRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	OrderId       string                 `protobuf:"bytes,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
 	Amount        float64                `protobuf:"fixed64,2,opt,name=amount,proto3" json:"amount,omitempty"`
@@ -29,20 +29,20 @@ type MakePaymentRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *MakePaymentRequest) Reset() {
-	*x = MakePaymentRequest{}
+func (x *PaymentRequest) Reset() {
+	*x = PaymentRequest{}
 	mi := &file_payment_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *MakePaymentRequest) String() string {
+func (x *PaymentRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*MakePaymentRequest) ProtoMessage() {}
+func (*PaymentRequest) ProtoMessage() {}
 
-func (x *MakePaymentRequest) ProtoReflect() protoreflect.Message {
+func (x *PaymentRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_payment_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -54,26 +54,26 @@ func (x *MakePaymentRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use MakePaymentRequest.ProtoReflect.Descriptor instead.
-func (*MakePaymentRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use PaymentRequest.ProtoReflect.Descriptor instead.
+func (*PaymentRequest) Descriptor() ([]byte, []int) {
 	return file_payment_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *MakePaymentRequest) GetOrderId() string {
+func (x *PaymentRequest) GetOrderId() string {
 	if x != nil {
 		return x.OrderId
 	}
 	return ""
 }
 
-func (x *MakePaymentRequest) GetAmount() float64 {
+func (x *PaymentRequest) GetAmount() float64 {
 	if x != nil {
 		return x.Amount
 	}
 	return 0
 }
 
-type MakePaymentResponse struct {
+type PaymentResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	PaymentId     string                 `protobuf:"bytes,1,opt,name=payment_id,json=paymentId,proto3" json:"payment_id,omitempty"`
 	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
@@ -81,20 +81,20 @@ type MakePaymentResponse struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *MakePaymentResponse) Reset() {
-	*x = MakePaymentResponse{}
+func (x *PaymentResponse) Reset() {
+	*x = PaymentResponse{}
 	mi := &file_payment_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *MakePaymentResponse) String() string {
+func (x *PaymentResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*MakePaymentResponse) ProtoMessage() {}
+func (*PaymentResponse) ProtoMessage() {}
 
-func (x *MakePaymentResponse) ProtoReflect() protoreflect.Message {
+func (x *PaymentResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_payment_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -106,46 +106,46 @@ func (x *MakePaymentResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use MakePaymentResponse.ProtoReflect.Descriptor instead.
-func (*MakePaymentResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use PaymentResponse.ProtoReflect.Descriptor instead.
+func (*PaymentResponse) Descriptor() ([]byte, []int) {
 	return file_payment_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *MakePaymentResponse) GetPaymentId() string {
+func (x *PaymentResponse) GetPaymentId() string {
 	if x != nil {
 		return x.PaymentId
 	}
 	return ""
 }
 
-func (x *MakePaymentResponse) GetStatus() string {
+func (x *PaymentResponse) GetStatus() string {
 	if x != nil {
 		return x.Status
 	}
 	return ""
 }
 
-type RefundPaymentRequest struct {
+type RefundRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	PaymentId     string                 `protobuf:"bytes,1,opt,name=payment_id,json=paymentId,proto3" json:"payment_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RefundPaymentRequest) Reset() {
-	*x = RefundPaymentRequest{}
+func (x *RefundRequest) Reset() {
+	*x = RefundRequest{}
 	mi := &file_payment_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RefundPaymentRequest) String() string {
+func (x *RefundRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RefundPaymentRequest) ProtoMessage() {}
+func (*RefundRequest) ProtoMessage() {}
 
-func (x *RefundPaymentRequest) ProtoReflect() protoreflect.Message {
+func (x *RefundRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_payment_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -157,39 +157,39 @@ func (x *RefundPaymentRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RefundPaymentRequest.ProtoReflect.Descriptor instead.
-func (*RefundPaymentRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use RefundRequest.ProtoReflect.Descriptor instead.
+func (*RefundRequest) Descriptor() ([]byte, []int) {
 	return file_payment_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *RefundPaymentRequest) GetPaymentId() string {
+func (x *RefundRequest) GetPaymentId() string {
 	if x != nil {
 		return x.PaymentId
 	}
 	return ""
 }
 
-type RefundPaymentResponse struct {
+type RefundResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Status        string                 `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RefundPaymentResponse) Reset() {
-	*x = RefundPaymentResponse{}
+func (x *RefundResponse) Reset() {
+	*x = RefundResponse{}
 	mi := &file_payment_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RefundPaymentResponse) String() string {
+func (x *RefundResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RefundPaymentResponse) ProtoMessage() {}
+func (*RefundResponse) ProtoMessage() {}
 
-func (x *RefundPaymentResponse) ProtoReflect() protoreflect.Message {
+func (x *RefundResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_payment_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -201,12 +201,12 @@ func (x *RefundPaymentResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RefundPaymentResponse.ProtoReflect.Descriptor instead.
-func (*RefundPaymentResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use RefundResponse.ProtoReflect.Descriptor instead.
+func (*RefundResponse) Descriptor() ([]byte, []int) {
 	return file_payment_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *RefundPaymentResponse) GetStatus() string {
+func (x *RefundResponse) GetStatus() string {
 	if x != nil {
 		return x.Status
 	}
@@ -217,22 +217,22 @@ var File_payment_proto protoreflect.FileDescriptor
 
 const file_payment_proto_rawDesc = "" +
 	"\n" +
-	"\rpayment.proto\x12\apayment\"G\n" +
-	"\x12MakePaymentRequest\x12\x19\n" +
+	"\rpayment.proto\x12\tpaymentpb\"C\n" +
+	"\x0ePaymentRequest\x12\x19\n" +
 	"\border_id\x18\x01 \x01(\tR\aorderId\x12\x16\n" +
-	"\x06amount\x18\x02 \x01(\x01R\x06amount\"L\n" +
-	"\x13MakePaymentResponse\x12\x1d\n" +
+	"\x06amount\x18\x02 \x01(\x01R\x06amount\"H\n" +
+	"\x0fPaymentResponse\x12\x1d\n" +
 	"\n" +
 	"payment_id\x18\x01 \x01(\tR\tpaymentId\x12\x16\n" +
-	"\x06status\x18\x02 \x01(\tR\x06status\"5\n" +
-	"\x14RefundPaymentRequest\x12\x1d\n" +
+	"\x06status\x18\x02 \x01(\tR\x06status\".\n" +
+	"\rRefundRequest\x12\x1d\n" +
 	"\n" +
-	"payment_id\x18\x01 \x01(\tR\tpaymentId\"/\n" +
-	"\x15RefundPaymentResponse\x12\x16\n" +
-	"\x06status\x18\x01 \x01(\tR\x06status2\xaa\x01\n" +
-	"\x0ePaymentService\x12H\n" +
-	"\vMakePayment\x12\x1b.payment.MakePaymentRequest\x1a\x1c.payment.MakePaymentResponse\x12N\n" +
-	"\rRefundPayment\x12\x1d.payment.RefundPaymentRequest\x1a\x1e.payment.RefundPaymentResponseBMZKgithub.com/Muhammad-Zahran-Albara122140240/Tugas2_gRPC/backend/pb/paymentpbb\x06proto3"
+	"payment_id\x18\x01 \x01(\tR\tpaymentId\"(\n" +
+	"\x0eRefundResponse\x12\x16\n" +
+	"\x06status\x18\x01 \x01(\tR\x06status2\x9f\x01\n" +
+	"\x0ePaymentService\x12G\n" +
+	"\x0eProcessPayment\x12\x19.paymentpb.PaymentRequest\x1a\x1a.paymentpb.PaymentResponse\x12D\n" +
+	"\rRefundPayment\x12\x18.paymentpb.RefundRequest\x1a\x19.paymentpb.RefundResponseB\x16Z\x14backend/pb/paymentpbb\x06proto3"
 
 var (
 	file_payment_proto_rawDescOnce sync.Once
@@ -248,16 +248,16 @@ func file_payment_proto_rawDescGZIP() []byte {
 
 var file_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_payment_proto_goTypes = []any{
-	(*MakePaymentRequest)(nil),    // 0: payment.MakePaymentRequest
-	(*MakePaymentResponse)(nil),   // 1: payment.MakePaymentResponse
-	(*RefundPaymentRequest)(nil),  // 2: payment.RefundPaymentRequest
-	(*RefundPaymentResponse)(nil), // 3: payment.RefundPaymentResponse
+	(*PaymentRequest)(nil),  // 0: paymentpb.PaymentRequest
+	(*PaymentResponse)(nil), // 1: paymentpb.PaymentResponse
+	(*RefundRequest)(nil),   // 2: paymentpb.RefundRequest
+	(*RefundResponse)(nil),  // 3: paymentpb.RefundResponse
 }
 var file_payment_proto_depIdxs = []int32{
-	0, // 0: payment.PaymentService.MakePayment:input_type -> payment.MakePaymentRequest
-	2, // 1: payment.PaymentService.RefundPayment:input_type -> payment.RefundPaymentRequest
-	1, // 2: payment.PaymentService.MakePayment:output_type -> payment.MakePaymentResponse
-	3, // 3: payment.PaymentService.RefundPayment:output_type -> payment.RefundPaymentResponse
+	0, // 0: paymentpb.PaymentService.ProcessPayment:input_type -> paymentpb.PaymentRequest
+	2, // 1: paymentpb.PaymentService.RefundPayment:input_type -> paymentpb.RefundRequest
+	1, // 2: paymentpb.PaymentService.ProcessPayment:output_type -> paymentpb.PaymentResponse
+	3, // 3: paymentpb.PaymentService.RefundPayment:output_type -> paymentpb.RefundResponse
 	2, // [2:4] is the sub-list for method output_type
 	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
