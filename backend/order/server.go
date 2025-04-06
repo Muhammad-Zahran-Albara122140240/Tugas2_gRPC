@@ -2,12 +2,13 @@
 package main
 
 import (
+	
     "context"
     "fmt"
     "log"
     "net"
 
-    "backend/pb/orderpb"
+    "github.com/Muhammad-Zahran-Albara122140240/Tugas2_gRPC/backend/pb/orderpb"
     "google.golang.org/grpc"
 )
 
