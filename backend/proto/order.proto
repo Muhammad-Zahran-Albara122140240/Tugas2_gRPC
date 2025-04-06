@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package order;
 
+option go_package = "github.com/Muhammad-Zahran-Albara122140240/Tugas2_gRPC/backend/pb/orderpb";
+
 service OrderService {
   rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
   rpc CancelOrder(CancelOrderRequest) returns (CancelOrderResponse);
